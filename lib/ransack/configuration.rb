@@ -9,7 +9,8 @@ module Ransack
     self.options = {
       :search_key => :q,
       :ignore_unknown_conditions => true,
-      :hide_sort_order_indicators => false
+      :hide_sort_order_indicators => false,
+      :hide_search_type_indicators => false
     }
 
     def configure
@@ -86,6 +87,22 @@ module Ransack
     #
     def hide_sort_order_indicators=(boolean)
       self.options[:hide_sort_order_indicators] = boolean
+    end
+
+    # By default, if you don't specify names for label helpers inside form helper,
+    # Ransack will try to get it from passed @search object, but will add additional
+    # text describing type of search you are performing e.g.: "xxxx starts with" etc.
+    # To disable this behavior and have only "xxxx" as label, 
+    # modify `config/initializers/ransack.rb` as follows:
+    #
+    # Ransack.configure do |config|
+    #   # Hide sort link order indicators globally across the application
+    #   config.hide_search_type_indicators = true
+    # end
+    #
+
+    def hide_search_type_indicators=(boolean)
+       self.options[:hide_search_type_indicators] = boolean
     end
 
     def arel_predicate_with_suffix(arel_predicate, suffix)

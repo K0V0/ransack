@@ -40,7 +40,7 @@ module Ransack
         :attributes => translated_names.join(" #{Translate.word(combinator)} ")
       }
 
-      if predicate
+       if ((predicate)&&(!Configuration.options[:hide_search_type_indicators]))
         defaults << "%{attributes} %{predicate}".freeze
         interpolations[:predicate] = Translate.predicate(predicate)
       else
