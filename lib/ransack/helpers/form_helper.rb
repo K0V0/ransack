@@ -106,13 +106,11 @@ module Ransack
         def html_options(args)
           html_options = extract_options_and_mutate_args!(args)
           html_options.merge(
-            #class: [['sort_link'.freeze, @current_dir], html_options[:class]]
-               #    .compact.join(' '.freeze)
-               class: 	[
-               			['sort_link'.freeze, @current_dir], 
-               			[('default_sort_' + @default_order.to_s).freeze, ''], 
-               			html_options[:class]
-               	    	].compact.join(' '.freeze)
+            class:  [
+                      ['sort_link'.freeze, @current_dir], 
+                      [('default_sort_' + @default_order.to_s).freeze, ''], 
+                      html_options[:class]
+                    ].compact.join(' '.freeze)
           )
         end
 
