@@ -105,9 +105,6 @@ module Ransack
 
         def html_options(args)
           html_options = extract_options_and_mutate_args!(args)
-          Rails.logger.info "-------------------"
-          Rails.logger.info args
-          Rails.logger.info html_options
           tmp = html_options.merge(
         		class:  [
 				      ['sort_link'.freeze, @current_dir], 
