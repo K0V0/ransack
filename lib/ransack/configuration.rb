@@ -10,7 +10,8 @@ module Ransack
       :search_key => :q,
       :ignore_unknown_conditions => true,
       :hide_sort_order_indicators => false,
-      :hide_search_type_indicators => false
+      :hide_search_type_indicators => false,
+      :generate_id_for_sortlink => true
     }
 
     def configure
@@ -103,6 +104,13 @@ module Ransack
 
     def hide_search_type_indicators=(boolean)
        self.options[:hide_search_type_indicators] = boolean
+    end
+
+    # generate sortlink with ID element 
+    # consisted of field name that are records sorted by with "_sort_link" suffix
+
+    def generate_id_for_sortlink(boolean)
+      self.options[:generate_id_for_sortlink] = boolean
     end
 
     def arel_predicate_with_suffix(arel_predicate, suffix)

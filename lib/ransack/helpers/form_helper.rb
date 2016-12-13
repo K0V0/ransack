@@ -105,13 +105,20 @@ module Ransack
 
         def html_options(args)
           html_options = extract_options_and_mutate_args!(args)
-          html_options.merge(
-          		class:  [
+          Rails.logger.info "-------------------"
+          Rails.logger.info args
+          Rails.logger.info html_options
+          tmp = html_options.merge(
+        		class:  [
 				      ['sort_link'.freeze, @current_dir], 
-				      [('default_sort_' + @default_order.to_s).freeze, ''], 
+				      ([('default_sort_' + @default_order.to_s).freeze, ''] if !@default_order.blank?), 
 				      html_options[:class]
-				].compact.join(' '.freeze)
+    				].compact.join(' '.freeze)
           )
+          if (Configuration.options[:generate_id_for_sortlink])&&(html_options[:id].blank?)
+            tmp.merge!(id: @field.to_s + '_sort_link')
+          end
+          tmp
         end
 
         private
